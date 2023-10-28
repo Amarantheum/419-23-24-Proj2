@@ -2,8 +2,8 @@
 	"name" : "Project2-23",
 	"version" : 1,
 	"creationdate" : 3780515724,
-	"modificationdate" : 3780894275,
-	"viewrect" : [ 0.0, 65.0, 1920.0, 941.0 ],
+	"modificationdate" : 3781312054,
+	"viewrect" : [ 8.0, 65.0, 1920.0, 941.0 ],
 	"autoorganize" : 1,
 	"hideprojectwindow" : 0,
 	"showdependencies" : 1,
@@ -37,6 +37,10 @@
 		}
 ,
 		"code" : 		{
+			"differentiator.js" : 			{
+				"kind" : "javascript",
+				"local" : 1
+			}
 
 		}
 ,
