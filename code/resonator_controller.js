@@ -44,6 +44,15 @@ function section3() {
     set_res_decay(0.0, null);
 }
 
+function section4() {
+    section = 4;
+    set_interp3(0.0, null);
+    set_reverb_mix(1.0, null);
+    set_saw_amp(1.0, [0.0, 10000]);
+    set_res_decay(0.0, null);
+    set_noise_amp(0.0, [1.0, 10000]);
+}
+
 function right_hand_speed(f) {
     if (section == 1) {
         set_noise_amp((clamp(f, 2.0, 22.0) - 2.0) / 20.0, null);
@@ -59,10 +68,25 @@ function spine_base_z(f) {
 }
 
 function spine_base_x(f) {
-    if (section == 2 || section == 3) {
+    if (section == 2 || (section == 3 || section == 4)) {
         var fs = clamp(Math.abs(f) * 0.5, 0.0, 1.0);
         set_interp1((1.0 - fs) * (1.0 - interp3_value), null);
         set_interp2(fs * (1.0 - interp3_value), null);
+    }
+}
+
+function hands_distance(f) {
+    var closeness_tolerance = 0.1;
+    f = f - closeness_tolerance;
+    if (section == 4) {
+        if (f < 0.0) {
+            set_interp3(1.0, null);
+        }
+        if (f >= 1.0) {
+            set_interp3(0.0, null);
+        } else {
+            set_interp3(Math.cos(Math.PI * f) / 2.0 + 0.5, null);
+        }
     }
 }
 
