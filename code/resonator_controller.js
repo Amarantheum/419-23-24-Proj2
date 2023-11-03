@@ -11,16 +11,22 @@ function reset() {
     set_interp2(0.0, null);
     set_interp3(0.0, null);
     set_reverb_mix(0.0, null);
+    set_vol(-70.0, null);
+    set_pan_rand_off();
+    set_pan_location(0.5, 0.5, 0.0);
 }
 
 function section1() {
     section = 1;
+    set_vol(-70.0, [0.0, 5000])
     set_interp1(0.0, null);
     set_interp2(0.0, null);
     set_interp3(1.0, null);
     set_reverb_mix(1.0, null);
     set_res_decay(0.0, null);
     set_saw_amp(0.0, null);
+    set_pan_rand_off();
+    set_pan_location(0.5, 0.5, 0.0);
 }
 
 function section2() {
@@ -31,9 +37,9 @@ function section2() {
     set_reverb_mix(1.0, null);
     set_saw_amp(0.0, [1.0, section_time * 1000]);
     set_res_decay(0.0, null);
-    //set_res_decay(0.0, [-4.0, section_time * 500]);
-    //set_saw_amp(0.0, [1.0, section_time * 1000]);
-    //schedule_function(rhythmic_hit_sequence, section_time * 0.5);
+    set_vol(0.0, null);
+    set_pan_rand_speed(10000, [500, 20000]);
+    set_pan_rand_on();
 }
 
 function section3() {
@@ -42,6 +48,10 @@ function section3() {
     set_reverb_mix(1.0, null);
     set_saw_amp(1.0, null);
     set_res_decay(0.0, null);
+    set_vol(0.0, null);
+    set_noise_amp(0.0, null);
+    set_pan_rand_speed(500, null);
+    set_pan_rand_on();
 }
 
 function section4() {
@@ -51,6 +61,15 @@ function section4() {
     set_saw_amp(1.0, [0.0, 10000]);
     set_res_decay(0.0, null);
     set_noise_amp(0.0, [1.0, 10000]);
+    set_vol(0.0, null);
+    set_pan_rand_off();
+    set_pan_location(0.5, 0.5, 5000.0);
+}
+
+function end() {
+    set_vol(0.0, [-70.0, 10000]);
+    set_pan_location(0.5, 0.5, 0.0);
+    set_pan_rand_off();
 }
 
 function right_hand_speed(f) {
@@ -169,3 +188,23 @@ function set_interp2(v, l) {
 function set_interp3(v, l) {
     s_control("interp3", 0, v, l);
 }
+
+function set_vol(v, l) {
+    s_control("vol", 0, v, l);
+}
+
+function set_pan_rand_on() {
+    outlet(0, ["pan/rand", 1]);
+}
+
+function set_pan_rand_off() {
+    outlet(0, ["pan/rand", 0]);
+}
+
+function set_pan_location(x, y, time) {
+    outlet(0, ["pan/loc", x, y, time]);
+}
+
+function set_pan_rand_speed(v, l) {
+    s_control("pan/rand/speed", 0, v, l);
+} 
